@@ -13,7 +13,7 @@
    - Rates safety from 1 (dangerous) to 10 (safe)
 
 ## 🚀 How to Test
-1. Open `src/SilverLining.html` in any browser
+1. Open `src/SL.html` in any browser
 2. **For URLs**:  
    - Enter suspicious links in the "URL Checker" tab
 3. **For Images**:  

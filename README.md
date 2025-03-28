@@ -1,16 +1,16 @@
 # 🛡️ Silver Lining AI - Threat Detection System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](https://github.com/vinayack7/Silver-Lining/blob/ed21798ce23424d19fe9a165d52c2b8a5e3bf4da/SL.html)
-[![Video Demo](https://img.shields.io/badge/Watch_Video-Here-red)](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view?usp=drivesdk)
-[![Explanation Demo]([https://img.shields.io/badge/Watch_Video-Here-pink)](https://drive.google.com/file/d/1ZHLb7vGA4BwyXv6w_HK2VfX59i4d5GuJ/view?usp=drivesdk).
+[![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](https://vinayack7.github.io/Silver-Lining/SL.html)
+[![Video Demo](https://img.shields.io/badge/Watch_Video-Here-red)](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view)
+[![Explanation Video](https://img.shields.io/badge/Explanation-Here-pink)](https://drive.google.com/file/d/1ZHLb7vGA4BwyXv6w_HK2VfX59i4d5GuJ/view)
 
 ## 🌟 Key Features
-| Feature | Description |
-|---------|-------------|
-| 🔍 URL Scanner | Detects phishing/malware |
-| 🎭 Deepfake AI | Flags AI-generated media |
-| 🛡️ Real-Time Block | Stops dangerous pages |
+| Feature | Description | Test Example |
+|---------|-------------|--------------|
+| 🔍 URL Scanner | Detects phishing/malware | `fake-bank.com` |
+| 🎭 Deepfake AI | Flags AI-generated media | [Sample Image](assets/test-image.jpg) |
+| 🛡️ Real-Time Block | Stops dangerous pages | `malicious-site.com` |
 
 ## 🚀 30-Second Setup
 ```bash
@@ -18,8 +18,8 @@
 git clone https://github.com/vinayack7/Silver-Lining.git
 
 # 2. Launch demo
+cd Silver-Lining
 open SL.html  # Or drag file to browser
-
 🧪 For Judges/Testers
 Test Safe URL:
 https://wikipedia.org → Should show ✅ Trust Score: 9/10

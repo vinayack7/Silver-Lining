@@ -20,6 +20,7 @@ git clone https://github.com/vinayack7/Silver-Lining.git
 # 2. Launch demo
 cd Silver-Lining
 open SL.html  # Or drag file to browser
+
 🧪 For Judges/Testers
 Test Safe URL:
 https://wikipedia.org → Should show ✅ Trust Score: 9/10

@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](https://vinayack7.github.io/Silver-Lining/SL.html)
 [![Video Demo](https://img.shields.io/badge/Watch_Video-Here-red)](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view)
-[![Explanation Video](https://img.shields.io/badge/Explanation-Here-pink)](https://drive.google.com/file/d/1ZHLb7vGA4BwyXv6w_HK2VfX59i4d5GuJ/view)
+[![Explanation Video](https://img.shields.io/badge/Explanation-Here-yellow)](https://drive.google.com/file/d/1ZHLb7vGA4BwyXv6w_HK2VfX59i4d5GuJ/view)
 
 ## 🌟 Key Features
 | Feature | Description | Test Example |

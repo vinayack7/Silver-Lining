@@ -17,7 +17,7 @@
 git clone https://github.com/vinayack7/Silver-Lining.git
 
 # 2. Launch demo
-open src/SL.html  # Or drag file to browser
+open SL.html  # Or drag file to browser
 
 🧪 For Judges/Testers
 Test Safe URL:

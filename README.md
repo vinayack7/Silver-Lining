@@ -1,68 +1,50 @@
-# 🛡️ Silver Lining AI - Online Threat Protection
+# 🛡️ Silver Lining AI - Threat Detection System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Open in GitHub](https://img.shields.io/badge/View-GitHub-black?logo=github)](https://github.com/vinayack7/Silver-Lining)
-
-> AI-powered protection against malicious links, deepfakes, and online scams
+[![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](https://vinayack7.github.io/Silver-Lining/src/SilverLining.html)
+[![Video Demo](https://img.shields.io/badge/Watch_Video-Here-red)](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view?usp=drivesdk)
 
 ## 🌟 Key Features
 | Feature | Description |
 |---------|-------------|
-| **🔗 URL Scanner** | Detects phishing/malware sites |
-| **🎭 Deepfake Detector** | Identifies AI-generated media |
-| **🛡️ Real-Time Blocking** | Stops dangerous pages before loading |
+| 🔍 URL Scanner | Detects phishing/malware |
+| 🎭 Deepfake AI | Flags AI-generated media |
+| 🛡️ Real-Time Block | Stops dangerous pages |
 
-## 🚀 Quick Setup
+## 🚀 30-Second Setup
 ```bash
-# 1. Clone repository
+# 1. Clone repo
 git clone https://github.com/vinayack7/Silver-Lining.git
 
-# 2. Navigate to project
-cd Silver-Lining/src
+# 2. Launch demo
+open src/SilverLining.html  # Or drag file to browser
 
-# 3. Launch demo (choose one)
-open SilverLining.html        # Mac
-start SilverLining.html       # Windows
-xdg-open SilverLining.html    # Linux
+🧪 For Judges/Testers
+Test Safe URL:
+https://wikipedia.org → Should show ✅ Trust Score: 9/10
 
-🧩 How It Works
-User submits URL/media
+Test Malicious URL:
+https://phishing-example.com → Should show 🚫 Blocked
 
-AI Engine analyzes content
+Test Deepfake:
+Upload this sample → Should flag as suspicious
 
-System returns safety score (1-10)
+🛠️ Technology
+Frontend: HTML/CSS/JavaScript
 
-Protection blocks dangerous content
+AI: TensorFlow + Gemini API
 
-mermaid
-Copy
-graph TD
-    A[User Input] --> B[AI Analysis]
-    B --> C{Threat?}
-    C -->|Yes| D[Block Content]
-    C -->|No| E[Allow Access]
+Infra: GitHub Pages (hosting)
 
-🛠️ Technology Stack
-Component	Tools
-Frontend	HTML5, CSS3, JavaScript
-Backend	Python, TensorFlow
-APIs	Gemini AI, DeepSeek
-Infra	Google Cloud, IDX
+📌 Competition Notes
+Innovation: Real-time explainable AI scoring
 
-📸 Live Demo
-Try these test cases:
+Limitation: Simulated backend (API integration in progress)
 
-Malicious URL
-https://phishing-example.com/login
+Roadmap: Browser extension → Mobile app → Enterprise API
 
-Deepfake Image
-Download Sample
+👥 Team
+G.VINAYACK (Team Lead)
 
-▶️ Full Video Demo (https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view?usp=drivesdk)
-
-👨‍💻 Development Team
-Role	Member	Contact
-Team Lead	G.VINAYACK	vinayackgundebommu1435@gmail.com
-
-📜 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+📧 Contact: vinayackgundebommu1435@gmail.com
+📄 Full Documentation: MVP.md

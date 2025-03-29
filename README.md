@@ -49,3 +49,4 @@ Roadmap: Browser extension → Mobile app → Enterprise API
 G.VINAYACK (Team Lead)
 
 📧 Contact: vinayackgundebommu1435@gmail.com
+📄 Full Documentation: MVP.md

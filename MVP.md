@@ -32,4 +32,4 @@
 ---
 
 > This MVP proves our core concept works.  
-> Watch the [demo video](https://example.com/demo) for a full walkthrough.
+> Watch the [demo video](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view) for a full walkthrough.

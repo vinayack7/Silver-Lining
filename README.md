@@ -47,12 +47,12 @@ python app.py        # Then go to http://localhost:5000
 
 ## 🧪 Testing Guide
 
-```bash
-Action	Expected Result
-Input: https://wikipedia.org	✅ Trust Score: 9/10 — Safe
-Input: https://phishing-example.com	🚫 Blocked Page Screen Shown
-Upload: AI-generated image	🎭 Flagged as "Suspicious"
-```
+| Action                                | Expected Result              |
+| ------------------------------------- | ---------------------------- |
+| Input: `https://wikipedia.org`        | ✅ Trust Score: 9/10 — Safe   |
+| Input: `https://phishing-example.com` | 🚫 Blocked Page Screen Shown |
+| Upload: AI-generated image            | 🎭 Flagged as "Suspicious"   |
+
 ---
 
 ## 🧠 Architecture

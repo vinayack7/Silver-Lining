@@ -5,7 +5,8 @@
 [![Video Demo](https://img.shields.io/badge/Video_Demo-Here-red)](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view)
 [![Explanation Video](https://img.shields.io/badge/Watch_Video-Here-purple)](https://drive.google.com/file/d/1SNCplL_UkRUdFjr8UqSbhFkSsRqC65uM/view?usp=drivesdk)
 
-> **Silver Lining** is a modern AI-based security tool designed to simulate phishing protection, deepfake detection, and real-time risk scoring using an interactive web UI. Ideal for users, developers, and evaluators who want to experience cybersecurity through an intuitive frontend and smart backend logic.
+🔒 Overview
+Silver Lining AI is a lightweight security simulation tool that mimics a real-world threat detection system — combining AI scoring, phishing protection, and deepfake detection into a single intuitive frontend. Designed as a hackathon project, interview-ready prototype, or cybersecurity UI showcase.
 
 ---
 

@@ -1,48 +1,69 @@
-from flask import Flask, render_template, request, jsonify
-from urllib.parse import urlparse
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+import random
+import time
 
 app = Flask(__name__)
+CORS(app)
 
-# Simulated threat scoring based on domain keywords
-THREAT_KEYWORDS = ['login', 'secure', 'free', 'download', 'paypal', 'gift-card', 'support', 'bank']
+# Simulated malicious keyword matching
+threat_database = {
+    "paypal": {
+        "trust_score": 1,
+        "analysis_details": "Detected phishing page mimicking PayPal.",
+        "threats_found": ["Phishing"],
+        "blocked": True,
+        "recommendation": "Avoid entering credentials here."
+    },
+    "wikipedia": {
+        "trust_score": 9,
+        "analysis_details": "Verified safe source.",
+        "threats_found": [],
+        "blocked": False,
+        "recommendation": "Safe to browse."
+    }
+}
 
-def analyze_url(url):
-    parsed_url = urlparse(url.lower())
-    domain = parsed_url.netloc
-    path = parsed_url.path
+@app.route('/analyze-url', methods=['POST'])
+def analyze_url():
+    data = request.json
+    url = data.get("url", "").lower()
 
-    full_url = domain + path
-    threat_score = 10
-    threats_found = []
+    time.sleep(1.2)  # Simulate processing time
 
-    for keyword in THREAT_KEYWORDS:
-        if keyword in full_url:
-            threat_score -= 2
-            threats_found.append(keyword.capitalize())
+    for keyword, result in threat_database.items():
+        if keyword in url:
+            return jsonify(result)
 
-    threat_score = max(threat_score, 1)
+    # Default: simulate a random result
+    trust_score = random.randint(1, 10)
+    return jsonify({
+        "trust_score": trust_score,
+        "analysis_details": "Simulated analysis completed.",
+        "threats_found": ["Suspicious Script"] if trust_score <= 4 else [],
+        "blocked": trust_score <= 3,
+        "recommendation": "Exercise caution." if trust_score <= 6 else "Safe to use."
+    })
+
+
+@app.route('/analyze-media', methods=['POST'])
+def analyze_media():
+    manipulation_score = random.randint(0, 100)
 
     result = {
-        'trust_score': threat_score,
-        'analysis_details': f"URL contains suspicious patterns: {', '.join(threats_found)}" if threats_found else "No obvious threat patterns detected.",
-        'threats_found': threats_found if threats_found else None,
-        'recommendation': 'Avoid clicking or sharing this link.' if threats_found else 'This URL appears safe.',
-        'blocked': threat_score <= 3
+        "manipulation_score": manipulation_score,
+        "technical_analysis": "Simulated forensic pattern scan.",
+        "detected_techniques": ["Face Swap", "Lip Sync AI"] if manipulation_score >= 70 else [],
+        "recommendation": "Do not trust this media." if manipulation_score >= 70 else (
+            "Further verification advised." if manipulation_score >= 30 else "Authentic visual media.")
     }
-    return result
+
+    return jsonify(result)
+
 
 @app.route('/')
 def index():
-    return render_template('SL.html')  # Put SL.html in the `templates/` folder
-
-@app.route('/analyze-url', methods=['POST'])
-def analyze():
-    data = request.get_json()
-    url = data.get('url', '')
-    if not url:
-        return jsonify({'error': 'No URL provided'}), 400
-    result = analyze_url(url)
-    return jsonify(result)
+    return "Silver Lining AI backend is running."
 
 if __name__ == '__main__':
     app.run(debug=True)

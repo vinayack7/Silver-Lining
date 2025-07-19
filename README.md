@@ -43,25 +43,32 @@ open SL.html         # Or drag into any browser
 pip install -r requirements.txt
 python app.py        # Then go to http://localhost:5000
 
-🧪 Testing Guide
+---
+
+## 🧪 Testing Guide
+
 Action	Expected Result
 Input: https://wikipedia.org	✅ Trust Score: 9/10 — Safe
 Input: https://phishing-example.com	🚫 Blocked Page Screen Shown
 Upload: AI-generated image	🎭 Flagged as "Suspicious"
 
-🧠 Architecture (Simplified)
-plaintext
-Copy
-Edit
+---
+
+## 🧠 Architecture (Simplified)
+
 SL.html (Frontend UI)
    │
    ├── JavaScript Logic (Threat Analysis Simulation)
    │
    └── Flask API (app.py)  ← Handles POST /analyze-url + /check-media
         └── Simulated DeepSeek AI scoring
+
 ⚠️ The current backend is simulated for demonstration. Production version would integrate real AI models or services (e.g., VirusTotal, DeepFace, Gemini).
 
-🎯 Roadmap
+---
+
+## 🎯 Roadmap
+
 ✅ Static UI + Demo Simulation
 
 🧪 Flask-based API scoring
@@ -74,7 +81,8 @@ SL.html (Frontend UI)
 
 🧠 ML model deployment on HuggingFace/Vertex AI
 
-👨‍💻 Project Lead
-G. Vinayack
-📧 vinayackgundebommu1435@gmail.com
+---
+
+👨‍💻 Project Lead G. Vinayack
+📧 22kq1a0546cse@gmail.com
 🔗 GitHub

@@ -1,52 +1,44 @@
-# 🛡️ Silver Lining AI - Threat Detection System
+# 🛡️ Silver Lining AI — Threat Detection System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](https://github.com/vinayack7/Silver-Lining/blob/7aa9edd3d988ea05bd28cba4942f83be64b40146/SL.html)
+[![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](https://github.com/vinayack7/Silver-Lining/blob/main/SL.html)
 [![Video Demo](https://img.shields.io/badge/Video_Demo-Here-red)](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view)
 [![Explanation Video](https://img.shields.io/badge/Watch_Video-Here-purple)](https://drive.google.com/file/d/1SNCplL_UkRUdFjr8UqSbhFkSsRqC65uM/view?usp=drivesdk)
 
-## 🌟 Key Features
-| Feature | Description | Test Example |
-|---------|-------------|--------------|
-| 🔍 URL Scanner | Detects phishing/malware | `fake-bank.com` |
-| 🎭 Deepfake AI | Flags AI-generated media | [Sample Image](assets/test-image.jpg) |
-| 🛡️ Real-Time Block | Stops dangerous pages | `malicious-site.com` |
+> **Silver Lining** is a modern AI-based security tool designed to simulate phishing protection, deepfake detection, and real-time risk scoring using an interactive web UI. Ideal for users, developers, and evaluators who want to experience cybersecurity through an intuitive frontend and smart backend logic.
 
-## 🚀 30-Second Setup
+---
+
+## 🌟 Features Overview
+
+| Feature            | Description                                | Example/Test                      |
+|-------------------|--------------------------------------------|----------------------------------|
+| 🔍 URL Scanner     | Detects phishing/malware threat patterns    | `https://secure-paypal-login.com` |
+| 🎭 Deepfake AI     | Flags AI-manipulated image/video files      | [Sample Image](assets/test-image.jpg) |
+| 🛡️ Real-Time Block | Displays a blocking screen for known threats | `https://malicious-site.com`     |
+| 📊 Trust Scoring   | Assigns 1–10 trust level with reasons        | `Score: 3/10 → Warning`          |
+
+---
+
+## ⚙️ Tech Stack
+
+- **Frontend:** HTML5, CSS3, JavaScript, Font Awesome  
+- **Backend:** Python (Flask)  
+- **AI Logic (Simulated):** Custom scoring with Gemini/TensorFlow placeholders  
+- **Demo & Hosting:** GitHub Pages, Localhost Flask
+
+---
+
+## 🚀 Getting Started (30 Seconds)
+
 ```bash
-# 1. Clone repo
+# 1. Clone the repo
 git clone https://github.com/vinayack7/Silver-Lining.git
-
-# 2. Launch demo
 cd Silver-Lining
-open SL.html  # Or drag file to browser
 
-🧪 For Judges/Testers
-Test Safe URL:
-https://wikipedia.org → Should show ✅ Trust Score: 9/10
+# 2. Run frontend (Option 1)
+open SL.html         # Or drag into any browser
 
-Test Malicious URL:
-https://phishing-example.com → Should show 🚫 Blocked
-
-Test Deepfake:
-Upload this sample → Should flag as suspicious
-
-🛠️ Technology
-Frontend: HTML/CSS/JavaScript
-
-AI: TensorFlow + Gemini API
-
-Infra: GitHub Pages (hosting)
-
-📌 Competition Notes
-Innovation: Real-time explainable AI scoring
-
-Limitation: Simulated backend (API integration in progress)
-
-Roadmap: Browser extension → Mobile app → Enterprise API
-
-👥 Team
-G.VINAYACK (Team Lead)
-
-📧 Contact: vinayackgundebommu1435@gmail.com
-📄 Full Documentation: MVP.md
+# 3. (Optional) Run backend with Flask
+pip install -r requirements.txt
+python app.py        # Then go to http://localhost:5000

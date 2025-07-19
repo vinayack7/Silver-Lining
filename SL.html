@@ -1197,340 +1197,149 @@
         </div>
     </footer>
     
-    <script>
-        // Tab functionality
-        function openTab(evt, tabName) {
-            const tabContents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove("active");
-            }
-            
-            const tabs = document.getElementsByClassName("tab");
-            for (let i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove("active");
-            }
-            
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-            
-            // Scroll to demo section when switching tabs
-            document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
+   <script>
+    // Tab switching
+    function openTab(evt, tabName) {
+        document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+
+        evt.currentTarget.classList.add('active');
+        document.getElementById(tabName).classList.add('active');
+        document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Validate URL
+    function isValidUrl(string) {
+        try {
+            new URL(string);
+            return true;
+        } catch (_) {
+            return false;
         }
-        
-        // URL Checker
-        async function checkURL() {
-            const urlInput = document.getElementById('url-checker').value.trim();
-            const resultDiv = document.getElementById('url-result');
-            
-            if (!urlInput) {
-                alert('Please enter a URL to check');
-                return;
-            }
-            
-            // Validate URL format
-            if (!isValidUrl(urlInput)) {
-                alert('Please enter a valid URL (e.g., https://example.com)');
-                return;
-            }
-            
-            resultDiv.innerHTML = '<p>Analyzing URL... <div class="spinner"></div></p>';
-            resultDiv.style.display = 'block';
-            resultDiv.className = 'result';
-            
-            try {
-                // In a real implementation, this would call your backend API
-                // which then calls the DeepSeek API
-                const response = await simulateDeepSeekURLCheck(urlInput);
-                
-                let resultClass, message;
-                const trustScore = response.trust_score;
-                
-                if (trustScore <= 3) {
-                    resultClass = 'danger';
-                    message = `<i class="fas fa-ban"></i> Trust Score: ${trustScore}/10 - HIGH RISK`;
-                } else if (trustScore <= 6) {
-                    resultClass = 'warning';
-                    message = `<i class="fas fa-exclamation-triangle"></i> Trust Score: ${trustScore}/10 - CAUTION ADVISED`;
-                } else {
-                    resultClass = 'safe';
-                    message = `<i class="fas fa-check-circle"></i> Trust Score: ${trustScore}/10 - SAFE`;
-                }
-                
-                resultDiv.className = 'result ' + resultClass;
-                resultDiv.innerHTML = `
-                    <h3>Safety Analysis Results</h3>
-                    <p>${message}</p>
-                    <div class="details">
-                        <h4>Analysis Details:</h4>
-                        <p>${response.analysis_details || 'No specific threats detected.'}</p>
-                        ${response.threats_found ? `<p><strong>Threats Found:</strong> ${response.threats_found.join(', ')}</p>` : ''}
-                        ${response.recommendation ? `<p><strong>Recommendation:</strong> ${response.recommendation}</p>` : ''}
-                        ${response.blocked ? `<p><strong>Action Taken:</strong> This website would be blocked by Silver Lining extension</p>` : ''}
-                    </div>
-                `;
-                
-            } catch (error) {
-                resultDiv.className = 'result warning';
-                resultDiv.innerHTML = '<h3>Error</h3><p>Could not analyze URL. Please try again later.</p>';
-                console.error('Error:', error);
-            }
+    }
+
+    // Media preview
+    function previewMedia(file) {
+        const preview = document.getElementById('media-preview');
+        preview.innerHTML = '';
+        if (file.type.startsWith('image/')) {
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(file);
+            preview.appendChild(img);
+        } else if (file.type.startsWith('video/')) {
+            const video = document.createElement('video');
+            video.src = URL.createObjectURL(file);
+            video.controls = true;
+            preview.appendChild(video);
         }
-        
-        // Test URL from test cases
-        function testURL(url) {
-            document.getElementById('url-checker').value = url;
-            document.querySelector('.tab.active').classList.remove('active');
-            document.querySelector('.tab-content.active').classList.remove('active');
-            document.querySelector('[onclick="openTab(event, \'url-tab\')"]').classList.add('active');
-            document.getElementById('url-tab').classList.add('active');
-            checkURL();
+    }
+
+    // Event listeners
+    const fileInput = document.getElementById('file-input');
+    const uploadBox = document.getElementById('upload-box');
+    const imageUrl = document.getElementById('image-url');
+
+    uploadBox.addEventListener('dragover', e => {
+        e.preventDefault();
+        uploadBox.style.borderColor = 'var(--primary)';
+    });
+
+    uploadBox.addEventListener('dragleave', () => {
+        uploadBox.style.borderColor = 'var(--light-gray)';
+    });
+
+    uploadBox.addEventListener('drop', e => {
+        e.preventDefault();
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            previewMedia(fileInput.files[0]);
+            imageUrl.value = '';
         }
-        
-        // Validate URL format
-        function isValidUrl(string) {
-            try {
-                new URL(string);
-                return true;
-            } catch (_) {
-                return false;
-            }
+    });
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length) {
+            previewMedia(fileInput.files[0]);
+            imageUrl.value = '';
         }
-        
-        // Deepfake Detection
-        const uploadBox = document.getElementById('upload-box');
-        const fileInput = document.getElementById('file-input');
-        const imageUrl = document.getElementById('image-url');
+    });
+
+    // Deepfake check
+    async function checkDeepfake() {
         const deepfakeResult = document.getElementById('deepfake-result');
-        const mediaPreview = document.getElementById('media-preview');
-        
-        // Handle drag and drop
-        uploadBox.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadBox.style.borderColor = 'var(--primary)';
-            uploadBox.style.backgroundColor = 'rgba(37, 99, 235, 0.1)';
-        });
-        
-        uploadBox.addEventListener('dragleave', () => {
-            uploadBox.style.borderColor = 'var(--light-gray)';
-            uploadBox.style.backgroundColor = 'rgba(241, 245, 249, 0.5)';
-        });
-        
-        uploadBox.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadBox.style.borderColor = 'var(--light-gray)';
-            uploadBox.style.backgroundColor = 'rgba(241, 245, 249, 0.5)';
-            
-            if (e.dataTransfer.files.length) {
-                fileInput.files = e.dataTransfer.files;
-                previewMedia(fileInput.files[0]);
-                imageUrl.value = '';
-            }
-        });
-        
-        fileInput.addEventListener('change', () => {
-            if (fileInput.files.length) {
-                previewMedia(fileInput.files[0]);
-                imageUrl.value = '';
-            }
-        });
-        
-        function previewMedia(file) {
-            mediaPreview.innerHTML = '';
-            
-            if (file.type.startsWith('image/')) {
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                mediaPreview.appendChild(img);
-            } else if (file.type.startsWith('video/')) {
-                const video = document.createElement('video');
-                video.src = URL.createObjectURL(file);
-                video.controls = true;
-                mediaPreview.appendChild(video);
-            }
+        deepfakeResult.innerHTML = '<p>Analyzing media... <div class="spinner"></div></p>';
+        deepfakeResult.className = 'result';
+        deepfakeResult.style.display = 'block';
+
+        let manipulationScore = Math.floor(Math.random() * 100);
+        let resultClass, message;
+
+        if (manipulationScore >= 70) {
+            resultClass = 'danger';
+            message = `<i class="fas fa-ban"></i> Manipulation Confidence: ${manipulationScore}% - LIKELY FAKE`;
+        } else if (manipulationScore >= 30) {
+            resultClass = 'warning';
+            message = `<i class="fas fa-exclamation-triangle"></i> Manipulation Confidence: ${manipulationScore}% - SUSPICIOUS`;
+        } else {
+            resultClass = 'safe';
+            message = `<i class="fas fa-check-circle"></i> Manipulation Confidence: ${manipulationScore}% - AUTHENTIC`;
         }
-        
-        async function checkDeepfake() {
-            deepfakeResult.innerHTML = '<p>Analyzing media... <div class="spinner"></div></p>';
-            deepfakeResult.style.display = 'block';
-            deepfakeResult.className = 'result';
-            
-            try {
-                let response;
-                
-                if (fileInput.files.length) {
-                    // Simulate file upload analysis
-                    response = await simulateDeepSeekDeepfakeCheck(fileInput.files[0]);
-                } else if (imageUrl.value) {
-                    // Validate URL format
-                    if (!isValidUrl(imageUrl.value)) {
-                        alert('Please enter a valid URL (e.g., https://example.com/image.jpg)');
-                        return;
-                    }
-                    // Simulate URL analysis
-                    response = await simulateDeepSeekDeepfakeCheck(imageUrl.value);
-                } else {
-                    throw new Error('No media provided');
-                }
-                
-                let resultClass, message;
-                const manipulationScore = response.manipulation_score;
-                
-                if (manipulationScore >= 70) {
-                    resultClass = 'danger';
-                    message = `<i class="fas fa-ban"></i> Manipulation Confidence: ${manipulationScore}% - LIKELY FAKE`;
-                } else if (manipulationScore >= 30) {
-                    resultClass = 'warning';
-                    message = `<i class="fas fa-exclamation-triangle"></i> Manipulation Confidence: ${manipulationScore}% - SUSPICIOUS`;
-                } else {
-                    resultClass = 'safe';
-                    message = `<i class="fas fa-check-circle"></i> Manipulation Confidence: ${manipulationScore}% - AUTHENTIC`;
-                }
-                
-                deepfakeResult.className = 'result ' + resultClass;
-                deepfakeResult.innerHTML = `
-                    <h3>Deepfake Analysis Results</h3>
-                    <p>${message}</p>
-                    <div class="details">
-                        <h4>Technical Analysis:</h4>
-                        <p>${response.technical_analysis || 'No specific manipulation techniques detected.'}</p>
-                        ${response.detected_techniques ? `<p><strong>Detected Techniques:</strong> ${response.detected_techniques.join(', ')}</p>` : ''}
-                        ${response.recommendation ? `<p><strong>Recommendation:</strong> ${response.recommendation}</p>` : ''}
-                    </div>
-                `;
-                
-            } catch (error) {
-                deepfakeResult.className = 'result warning';
-                deepfakeResult.innerHTML = '<h3>Error</h3><p>Could not analyze media. Please try again later.</p>';
-                console.error('Error:', error);
-            }
+
+        deepfakeResult.className = 'result ' + resultClass;
+        deepfakeResult.innerHTML = `
+            <h3>Deepfake Analysis Results</h3>
+            <p>${message}</p>
+            <div class="details">
+                <h4>Technical Analysis:</h4>
+                <p>Simulated deepfake detection for demo purposes.</p>
+            </div>
+        `;
+    }
+
+    // Test URL
+    function testURL(url) {
+        document.getElementById('url-checker').value = url;
+        openTab({ currentTarget: document.querySelector('[onclick*="url-tab"]') }, 'url-tab');
+        checkURL();
+    }
+
+    // Check URL (simulated)
+    async function checkURL() {
+        const urlInput = document.getElementById('url-checker').value.trim();
+        const resultDiv = document.getElementById('url-result');
+
+        if (!urlInput) return alert('Please enter a URL');
+        if (!isValidUrl(urlInput)) return alert('Invalid URL format');
+
+        resultDiv.innerHTML = '<p>Analyzing URL... <div class="spinner"></div></p>';
+        resultDiv.className = 'result';
+        resultDiv.style.display = 'block';
+
+        await new Promise(res => setTimeout(res, 1000));
+        const score = Math.floor(Math.random() * 10) + 1;
+
+        let resultClass, message;
+        if (score <= 3) {
+            resultClass = 'danger';
+            message = `<i class="fas fa-ban"></i> Trust Score: ${score}/10 - HIGH RISK`;
+        } else if (score <= 6) {
+            resultClass = 'warning';
+            message = `<i class="fas fa-exclamation-triangle"></i> Trust Score: ${score}/10 - CAUTION ADVISED`;
+        } else {
+            resultClass = 'safe';
+            message = `<i class="fas fa-check-circle"></i> Trust Score: ${score}/10 - SAFE`;
         }
-        
-        // Simulation functions - in a real app, these would be actual API calls to your backend
-        async function simulateDeepSeekURLCheck(url) {
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 1500));
-            
-            // Check against known test cases
-            const testCases = {
-                'secure-paypal-login.com': {
-                    trust_score: 1,
-                    analysis_details: 'This domain is a known phishing attempt mimicking the PayPal login page. It uses visual design elements nearly identical to the legitimate PayPal site to trick users into entering their credentials.',
-                    threats_found: ['Phishing', 'Credential Harvesting'],
-                    recommendation: 'Do not enter any information on this site. The legitimate PayPal website is https://www.paypal.com.',
-                    blocked: true
-                },
-                'download-free-games.com': {
-                    trust_score: 2,
-                    analysis_details: 'This domain is associated with malware distribution. The executable file at this URL contains trojan malware that can compromise your device.',
-                    threats_found: ['Malware', 'Trojan'],
-                    recommendation: 'Do not download or run any files from this website. Delete any files already downloaded from this source.',
-                    blocked: true
-                },
-                'amazon-gift-card-generator.com': {
-                    trust_score: 1,
-                    analysis_details: 'This is a known scam website claiming to offer free gift cards in exchange for completing surveys or providing payment information.',
-                    threats_found: ['Scam', 'Financial Fraud'],
-                    recommendation: 'No legitimate website offers free gift cards in this manner. This is a scam to collect payment information.',
-                    blocked: true
-                },
-                'wikipedia.org': {
-                    trust_score: 9,
-                    analysis_details: 'This is the legitimate Wikipedia website, a well-known and trusted source of information.',
-                    threats_found: null,
-                    recommendation: 'This website is safe to browse.'
-                },
-                'breaking-news-today.com': {
-                    trust_score: 4,
-                    analysis_details: 'This domain appears to be a fake news site with sensationalist headlines and unverified claims. The domain is misspelled to resemble legitimate news sites.',
-                    threats_found: ['Misinformation', 'Clickbait'],
-                    recommendation: 'Verify any information from this site with reputable news sources before believing or sharing it.'
-                },
-                'microsoft-support-center.com': {
-                    trust_score: 2,
-                    analysis_details: 'This is a known tech support scam website pretending to be affiliated with Microsoft. It may try to convince you to install remote access software or pay for unnecessary services.',
-                    threats_found: ['Tech Support Scam', 'Financial Fraud'],
-                    recommendation: 'Microsoft does not operate through such websites. Do not call any numbers or install any software suggested by this site.',
-                    blocked: true
-                }
-            };
-            
-            // Check if URL matches any test cases
-            for (const domain in testCases) {
-                if (url.includes(domain)) {
-                    return testCases[domain];
-                }
-            }
-            
-            // Generate random results for other URLs
-            const isMalicious = Math.random() < 0.3;
-            const isSuspicious = !isMalicious && Math.random() < 0.4;
-            
-            if (isMalicious) {
-                const threats = [];
-                if (Math.random() > 0.5) threats.push('Phishing');
-                if (Math.random() > 0.5) threats.push('Malware');
-                if (Math.random() > 0.5) threats.push('Scam');
-                
-                return {
-                    trust_score: Math.floor(Math.random() * 3) + 1,
-                    analysis_details: 'This URL exhibits characteristics commonly associated with malicious websites.',
-                    threats_found: threats.length ? threats : ['Suspicious behavior'],
-                    recommendation: 'Do not proceed to this website. The content may attempt to steal your information or install malicious software.',
-                    blocked: true
-                };
-            } else if (isSuspicious) {
-                return {
-                    trust_score: Math.floor(Math.random() * 3) + 4,
-                    analysis_details: 'This URL shows some suspicious characteristics but may not be outright malicious.',
-                    threats_found: ['Potential risk factors detected'],
-                    recommendation: 'Proceed with caution. Verify the website is legitimate before entering any personal information.'
-                };
-            } else {
-                return {
-                    trust_score: Math.floor(Math.random() * 4) + 7,
-                    analysis_details: 'This URL appears to be safe based on our analysis.',
-                    threats_found: null,
-                    recommendation: 'This website appears legitimate. Standard security precautions still apply.'
-                };
-            }
-        }
-        
-        async function simulateDeepSeekDeepfakeCheck(input) {
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Generate random results for demo purposes
-            const isFake = Math.random() < 0.25;
-            const isSuspicious = !isFake && Math.random() < 0.3;
-            
-            if (isFake) {
-                const techniques = [];
-                if (Math.random() > 0.5) techniques.push('Face Swapping');
-                if (Math.random() > 0.5) techniques.push('GAN Artifacts');
-                if (Math.random() > 0.5) techniques.push('Inconsistent Lighting');
-                
-                return {
-                    manipulation_score: Math.floor(Math.random() * 30) + 70,
-                    technical_analysis: 'This media exhibits multiple signs of digital manipulation consistent with deepfake technology.',
-                    detected_techniques: techniques.length ? techniques : ['Synthetic Media Indicators'],
-                    recommendation: 'This content is likely artificially generated. Verify its authenticity through other sources.'
-                };
-            } else if (isSuspicious) {
-                return {
-                    manipulation_score: Math.floor(Math.random() * 40) + 30,
-                    technical_analysis: 'Some indicators of potential manipulation were detected, but not conclusively.',
-                    detected_techniques: ['Possible editing artifacts'],
-                    recommendation: 'This content may have been altered. Consider verifying its authenticity.'
-                };
-            } else {
-                return {
-                    manipulation_score: Math.floor(Math.random() * 30),
-                    technical_analysis: 'No significant signs of digital manipulation were detected.',
-                    detected_techniques: null,
-                    recommendation: 'This content appears authentic. Standard verification practices still apply.'
-                };
-            }
-        }
-    </script>
+
+        resultDiv.className = 'result ' + resultClass;
+        resultDiv.innerHTML = `
+            <h3>Safety Analysis Results</h3>
+            <p>${message}</p>
+            <div class="details">
+                <h4>Analysis Details:</h4>
+                <p>Simulated URL analysis result.</p>
+            </div>
+        `;
+    }
+</script>
 </body>
 </html>

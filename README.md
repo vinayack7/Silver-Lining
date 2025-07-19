@@ -30,7 +30,8 @@
 ---
 
 ## 🚀 Getting Started (30 Seconds)
-'''bash
+
+```bash
 # 1. Clone the repo
 git clone https://github.com/vinayack7/Silver-Lining.git
 cd Silver-Lining
@@ -41,7 +42,7 @@ open SL.html         # Or drag into any browser
 # 3. (Optional) Run backend with Flask
 pip install -r requirements.txt
 python app.py        # Then go to http://localhost:5000
-,,,
+```
 ---
 
 ## 🧪 Testing Guide

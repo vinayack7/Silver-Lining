@@ -86,7 +86,7 @@ SL.html (Frontend UI)
 ---
 
 ```bash
-👨‍💻 Project Lead: G. Vinayack
+👨‍💻 Project Lead: G.Vinayack
 📧 22kq1a0546cse@gmail.com
 🔗 GitHub
 ```

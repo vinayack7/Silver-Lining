@@ -47,16 +47,17 @@ python app.py        # Then go to http://localhost:5000
 
 ## 🧪 Testing Guide
 
+```bash
 Action	Expected Result
 Input: https://wikipedia.org	✅ Trust Score: 9/10 — Safe
 Input: https://phishing-example.com	🚫 Blocked Page Screen Shown
 Upload: AI-generated image	🎭 Flagged as "Suspicious"
-
+```
 ---
 
 ## 🧠 Architecture
-''bash
 
+```bash
 SL.html (Frontend UI)
    │
    ├── JavaScript Logic (Threat Analysis Simulation)
@@ -65,7 +66,7 @@ SL.html (Frontend UI)
         └── Simulated DeepSeek AI scoring
 
 ⚠️ The current backend is simulated for demonstration. Production version would integrate real AI models or services (e.g., VirusTotal, DeepFace, Gemini).
-
+```
 ---
 
 ## 🎯 Roadmap
@@ -84,6 +85,9 @@ SL.html (Frontend UI)
 
 ---
 
-👨‍💻 Project Lead G. Vinayack
+```bash
+👨‍💻 Project Lead: G. Vinayack
 📧 22kq1a0546cse@gmail.com
 🔗 GitHub
+```
+---

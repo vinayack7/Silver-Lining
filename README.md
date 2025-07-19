@@ -31,7 +31,6 @@
 
 ## 🚀 Getting Started (30 Seconds)
 
-```bash
 # 1. Clone the repo
 git clone https://github.com/vinayack7/Silver-Lining.git
 cd Silver-Lining

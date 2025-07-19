@@ -1,7 +1,7 @@
 # 🛡️ Silver Lining AI — Threat Detection System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](https://github.com/vinayack7/Silver-Lining/blob/main/SL.html)
+[![Live Demo](https://img.shields.io/badge/Try_Online-Here-green)](templates/SL.html)
 [![Video Demo](https://img.shields.io/badge/Video_Demo-Here-red)](https://drive.google.com/file/d/1FOLh3OPfuckIW0o2swGFXAWhN9ICngMA/view)
 [![Explanation Video](https://img.shields.io/badge/Watch_Video-Here-purple)](https://drive.google.com/file/d/1SNCplL_UkRUdFjr8UqSbhFkSsRqC65uM/view?usp=drivesdk)
 

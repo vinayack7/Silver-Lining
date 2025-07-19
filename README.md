@@ -53,7 +53,8 @@ Upload: AI-generated image	🎭 Flagged as "Suspicious"
 
 ---
 
-## 🧠 Architecture (Simplified)
+## 🧠 Architecture
+''bash
 
 SL.html (Frontend UI)
    │

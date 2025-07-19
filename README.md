@@ -85,7 +85,9 @@ SL.html (Frontend UI)
 
 ---
 
-👨‍💻 Project Lead: G.Vinayack
-📧 22kq1a0546cse@gmail.com
+##👨‍💻 Project Lead
+
+G.Vinayack
+📧 Email: 22kq1a0546cse@gmail.com
 
 ---
